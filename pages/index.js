@@ -169,7 +169,7 @@ export default function Home() {
   return (
     <Layout title="Venta de plantas de Gabi y Victor">
       <Box as="header" mt={10}>
-        <Heading size="xl">Venta de plantas de Gabi y Victor</Heading>
+        <Heading size="xl">Venta de artículos de Gabi y Victor</Heading>
         <Text fontSize="lg" mt={6}>
           Nuestras plantas han recibido el amor de Victor y mío. Vendemos
           nuestras cosas porque nos mudamos a otro país.
