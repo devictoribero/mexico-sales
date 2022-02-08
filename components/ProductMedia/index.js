@@ -18,8 +18,16 @@ export function ProductMedia({ images }) {
   const hasManyImages = images.length > 1;
   const [imageIndexSelected, setImageIndexSelected] = useState(0);
 
-  if (!images?.length) {
-    return <Box width="100%" backgroundColor="gray.50" borderRadius="s" />;
+  if (!images?.length || images.length === 0) {
+    return (
+      <Box
+        borderRadius="10px"
+        width="100%"
+        height="350px"
+        maxHeight="350px"
+        background="gray.50"
+      />
+    );
   }
 
   const showPreviousButton = hasManyImages && imageIndexSelected > 0;

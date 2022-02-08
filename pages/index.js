@@ -1,6 +1,8 @@
-import { Box, Heading, SimpleGrid, Text } from "@chakra-ui/react";
+import { Box, Heading, Link, SimpleGrid, Text } from "@chakra-ui/react";
 import { Layout } from "../components/Layout";
 import { Product } from "../components/Product";
+import { useGoogleSheet } from "../hooks/useGoogleSheet";
+import { contactTel, telHref, whatsappHref } from "../lib/contact";
 
 const products = {
   plants: [
@@ -156,14 +158,33 @@ const products = {
   ],
 };
 
+const Hyperlink = ({ children, ...props }) => (
+  <Link isExternal color="blue.500" textDecoration="underline" {...props}>
+    {children}
+  </Link>
+);
+
 export default function Home() {
+  const products = useGoogleSheet();
+
   return (
     <Layout title="Venta de plantas de Gabi y Victor">
       <Box as="header" mt={10}>
         <Heading size="xl">Venta de plantas de Gabi y Victor</Heading>
-        <Text fontSize="lg" mt={6} mb={12}>
-          Todas las plantas han crecido con nuestro amor. Tomar una captura de
-          la planta que os gusta y hacerselo saber a Gabriela
+        <Text fontSize="lg" mt={6}>
+          Todas las cosas han crecido con el amor incondicional de mi Gabriela y
+          Victor. Vendemos las cosas porque nos vamos a vivir a otro pais.
+        </Text>
+        <Text fontSize="lg" mt={2} mb={12}>
+          Envieme fotos de los productos que le interesen
+          <Hyperlink href={whatsappHref()} ml="5px">
+            por whatsapp
+          </Hyperlink>{" "}
+          o
+          <Hyperlink href={telHref()} ml="5px">
+            llameme al {contactTel}
+          </Hyperlink>
+          .
         </Text>
       </Box>
 
@@ -173,13 +194,14 @@ export default function Home() {
           columnGap={{ base: 2, md: 4 }}
           rowGap={6}
         >
-          {products.plants.map((product) => (
+          {products?.map((product) => (
             <Product
               key={product.name}
               name={product.name}
-              images={product.images}
+              images={product?.images}
               quantity={product.quantity}
               price={product.price}
+              informative_text={product.informative_text}
             />
           ))}
         </SimpleGrid>

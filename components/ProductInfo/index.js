@@ -1,22 +1,21 @@
-import { Flex } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 import { ProductPrice } from "../ProductPrice";
 import { ProductTitle } from "../ProductTitle";
-import { Quantity } from "../Quantity";
 
-export function ProductInfo({ name, price, quantity, ...props }) {
+export function ProductInfo({
+  name,
+  price,
+  quantity,
+  informative_text,
+  ...props
+}) {
   return (
-    <Flex
-      flexWrap="wrap"
-      alignItems="center"
-      justifyContent={"space-between"}
-      {...props}
-    >
-      <Flex flexWrap="wrap" alignItems="center">
-        <ProductTitle>
-          {name} <Quantity ml={2}>x{quantity}</Quantity>
-        </ProductTitle>
+    <Flex alignItems="flex-start" justifyContent={"space-between"} {...props}>
+      <Flex flexDirection="column">
+        <ProductTitle mr="20px">{name}</ProductTitle>
+        {informative_text && <Text fontSize="xs">{informative_text}</Text>}
       </Flex>
-      <ProductPrice>{price} MXN</ProductPrice>
+      <ProductPrice>{price}</ProductPrice>
     </Flex>
   );
 }
