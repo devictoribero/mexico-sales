@@ -37,14 +37,15 @@ export const useGoogleSheet = () => {
               .filter(Boolean)
               .map((imageName) => `images/plants/${imageName}`);
 
-            products.push({
-              name: getCellValue(product_name_index),
-              price: getCellValue(selling_price_index) || "Preguntar",
-              status: getCellValue(status_index),
-              quantity: getCellValue(quantity_index),
-              informative_text: getCellValue(informative_text_index),
-              images: images,
-            });
+            images.length > 0 &&
+              products.push({
+                name: getCellValue(product_name_index),
+                price: getCellValue(selling_price_index) || "Preguntar",
+                status: getCellValue(status_index),
+                quantity: getCellValue(quantity_index),
+                informative_text: getCellValue(informative_text_index),
+                images: images,
+              });
           });
 
         setFetchedProducts(products);
