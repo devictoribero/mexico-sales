@@ -180,10 +180,10 @@ export default function Home() {
           <Hyperlink href={whatsappHref()} ml="5px">
             por whatsapp
           </Hyperlink>{" "}
-          o
+          {/* o
           <Hyperlink href={telHref()} ml="5px">
             llameme al {contactTel}
-          </Hyperlink>
+          </Hyperlink> */}
           .
         </Text>
       </Box>
