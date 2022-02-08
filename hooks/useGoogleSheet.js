@@ -6,6 +6,8 @@ const product_name_index = 1;
 const selling_price_index = 3;
 const status_index = 6;
 const quantity_index = 7;
+const image_name_1_index = 8;
+const image_name_2_index = 9;
 const informative_text_index = 10;
 
 export const useGoogleSheet = () => {
@@ -28,12 +30,20 @@ export const useGoogleSheet = () => {
               return;
             }
 
+            // Get the images of the plant. Max 2
+            const image1 = getCellValue(image_name_1_index);
+            const image2 = getCellValue(image_name_2_index);
+            const images = [image1, image2]
+              .filter(Boolean)
+              .map((imageName) => `images/plants/${imageName}`);
+
             products.push({
               name: getCellValue(product_name_index),
               price: getCellValue(selling_price_index) || "Preguntar",
               status: getCellValue(status_index),
               quantity: getCellValue(quantity_index),
               informative_text: getCellValue(informative_text_index),
+              images: images,
             });
           });
 
