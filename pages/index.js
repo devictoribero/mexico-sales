@@ -166,20 +166,20 @@ const Hyperlink = ({ children, ...props }) => (
 
 export default function Home() {
   const products = useGoogleSheet();
-
   return (
     <Layout title="Venta de plantas de Gabi y Victor">
       <Box as="header" mt={10}>
         <Heading size="xl">Venta de plantas de Gabi y Victor</Heading>
         <Text fontSize="lg" mt={6}>
-          Todas las cosas han crecido con el amor incondicional de mi Gabriela y
-          Victor. Vendemos las cosas porque nos vamos a vivir a otro pais.
+          Nuestras plantas han recibido el amor de Victor y mío. Vendemos
+          nuestras cosas porque nos mudamos a otro país.
         </Text>
         <Text fontSize="lg" mt={2} mb={12}>
+          <Hyperlink href={whatsappHref()} mr="5px">
+            Envíame un WhatsApp
+          </Hyperlink>
+          con la foto del artículo o la planta que te interese tener en casa.
           Envieme fotos de los productos que le interesen
-          <Hyperlink href={whatsappHref()} ml="5px">
-            por whatsapp
-          </Hyperlink>{" "}
           {/* o
           <Hyperlink href={telHref()} ml="5px">
             llameme al {contactTel}
