@@ -42,7 +42,12 @@ export function ProductMedia({ images }) {
   };
 
   return (
-    <Box width="100%" backgroundColor="gray.50" position="relative">
+    <Box
+      width="100%"
+      backgroundColor="gray.50"
+      position="relative"
+      height="350px"
+    >
       {showPreviousButton && (
         <Box position="absolute" left={2} top="45%">
           <ButtonPrevious size="sm" onClick={handleOnButtonPreviousClick} />

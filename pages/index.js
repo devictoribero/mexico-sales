@@ -1,168 +1,18 @@
 import { Box, Heading, Link, SimpleGrid, Text } from "@chakra-ui/react";
 import { Layout } from "../components/Layout";
 import { Product } from "../components/Product";
+import { LoadingProduct } from "../components/LoadingProduct";
 import { useGoogleSheet } from "../hooks/useGoogleSheet";
 import { contactTel, telHref, whatsappHref } from "../lib/contact";
-
-const products = {
-  plants: [
-    {
-      name: "Sansevieria",
-      quantity: 2,
-      price: 233,
-      images: [
-        "images/plants/plant-1.jpeg",
-        "images/plants/plant-2.jpeg",
-        "images/plants/plant-3.jpeg",
-      ],
-    },
-    {
-      category: "plants",
-      name: "Sansevieria",
-      quantity: 2,
-      price: 233,
-      images: ["images/plants/plant-1.jpeg"],
-    },
-    {
-      category: "plants",
-      name: "Sansevieria",
-      quantity: 2,
-      price: 233,
-      images: [
-        "images/plants/plant-1.jpeg",
-        "images/plants/plant-2.jpeg",
-        "images/plants/plant-3.jpeg",
-      ],
-    },
-    {
-      category: "plants",
-      name: "Sansevieria",
-      quantity: 2,
-      price: 233,
-      images: [
-        "images/plants/plant-1.jpeg",
-        "images/plants/plant-2.jpeg",
-        "images/plants/plant-3.jpeg",
-      ],
-    },
-    {
-      category: "plants",
-      name: "Sansevieria",
-      quantity: 2,
-      price: 233,
-      images: [
-        "images/plants/plant-1.jpeg",
-        "images/plants/plant-2.jpeg",
-        "images/plants/plant-3.jpeg",
-      ],
-    },
-    {
-      category: "plants",
-      name: "Sansevieria",
-      quantity: 2,
-      price: 233,
-      images: [
-        "images/plants/plant-1.jpeg",
-        "images/plants/plant-2.jpeg",
-        "images/plants/plant-3.jpeg",
-      ],
-    },
-    {
-      category: "plants",
-      name: "Sansevieria",
-      quantity: 2,
-      price: 233,
-      images: [
-        "images/plants/plant-1.jpeg",
-        "images/plants/plant-2.jpeg",
-        "images/plants/plant-3.jpeg",
-      ],
-    },
-    {
-      category: "plants",
-      name: "Sansevieria",
-      quantity: 2,
-      price: 233,
-      images: [
-        "images/plants/plant-1.jpeg",
-        "images/plants/plant-2.jpeg",
-        "images/plants/plant-3.jpeg",
-      ],
-    },
-    {
-      category: "plants",
-      name: "Sansevieria",
-      quantity: 2,
-      price: 233,
-      images: [
-        "images/plants/plant-1.jpeg",
-        "images/plants/plant-2.jpeg",
-        "images/plants/plant-3.jpeg",
-      ],
-    },
-    {
-      category: "plants",
-      name: "Sansevieria",
-      quantity: 2,
-      price: 233,
-      images: [
-        "images/plants/plant-1.jpeg",
-        "images/plants/plant-2.jpeg",
-        "images/plants/plant-3.jpeg",
-      ],
-    },
-    {
-      category: "plants",
-      name: "Sansevieria",
-      quantity: 2,
-      price: 233,
-      images: [
-        "images/plants/plant-1.jpeg",
-        "images/plants/plant-2.jpeg",
-        "images/plants/plant-3.jpeg",
-      ],
-    },
-    {
-      category: "plants",
-      name: "Sansevieria",
-      quantity: 2,
-      price: 233,
-      images: [
-        "images/plants/plant-1.jpeg",
-        "images/plants/plant-2.jpeg",
-        "images/plants/plant-3.jpeg",
-      ],
-    },
-    {
-      category: "plants",
-      name: "Sansevieria",
-      quantity: 2,
-      price: 233,
-      images: [
-        "images/plants/plant-1.jpeg",
-        "images/plants/plant-2.jpeg",
-        "images/plants/plant-3.jpeg",
-      ],
-    },
-    {
-      category: "plants",
-      name: "Sansevieria",
-      quantity: 2,
-      price: 233,
-      images: [
-        "images/plants/plant-1.jpeg",
-        "images/plants/plant-2.jpeg",
-        "images/plants/plant-3.jpeg",
-      ],
-    },
-  ],
-};
 
 const Hyperlink = ({ children, ...props }) => (
   <Link isExternal color="blue.500" textDecoration="underline" {...props}>
     {children}
   </Link>
 );
+const emptyProducts = [
+  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 113, 14, 15, 16, 17, 18, 19,
+];
 
 export default function Home() {
   const products = useGoogleSheet();
@@ -194,16 +44,20 @@ export default function Home() {
           columnGap={{ base: 2, md: 4 }}
           rowGap={6}
         >
-          {products?.map((product) => (
-            <Product
-              key={product.name}
-              name={product.name}
-              images={product?.images}
-              quantity={product.quantity}
-              price={product.price}
-              informative_text={product.informative_text}
-            />
-          ))}
+          {!products
+            ? emptyProducts.map((product) => (
+                <LoadingProduct key={product.name} />
+              ))
+            : products?.map((product) => (
+                <Product
+                  key={product.name}
+                  name={product.name}
+                  images={product?.images}
+                  quantity={product.quantity}
+                  price={product.price}
+                  informative_text={product.informative_text}
+                />
+              ))}
         </SimpleGrid>
       </Box>
     </Layout>
