@@ -21,20 +21,18 @@ export default function Home() {
       <Box as="header" mt={10}>
         <Heading size="xl">Venta de artículos de Gabi y Victor</Heading>
         <Text fontSize="lg" mt={6}>
-          Nuestras plantas han recibido el amor de Victor y mío. Vendemos
-          nuestras cosas porque nos mudamos a otro país.
+          Nuestras plantas han recibido el amor de Victor y mío.
         </Text>
         <Text fontSize="lg" mt={2} mb={12}>
           <Hyperlink href={whatsappHref()} mr="5px">
             Envíame un WhatsApp
           </Hyperlink>
-          con la foto del artículo o la planta que te interese tener en casa.
-          Envieme fotos de los productos que le interesen
+          con la foto del artículo o la planta que te interese tener en casa
+          🐈‍⬛ 🌱 🐈.
           {/* o
           <Hyperlink href={telHref()} ml="5px">
             llameme al {contactTel}
           </Hyperlink> */}
-          .
         </Text>
       </Box>
 
@@ -48,9 +46,9 @@ export default function Home() {
             ? emptyProducts.map((product) => (
                 <LoadingProduct key={product.name} />
               ))
-            : products?.map((product) => (
+            : products?.map((product, index) => (
                 <Product
-                  key={product.name}
+                  key={`${product.name}_${index}`}
                   name={product.name}
                   images={product?.images}
                   quantity={product.quantity}
