@@ -39,6 +39,7 @@ export const useGoogleSheet = () => {
             const image4 = getCellValue(image_name_4_index);
             const images = [image1, image2, image3, image4]
               .filter(Boolean)
+              .filter((name) => name.includes(".jpg")) //make sure the image is present and is not an annotation
               .map((imageName) => `images/plants/${imageName}`);
 
             images.length > 0 &&
