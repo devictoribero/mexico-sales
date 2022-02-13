@@ -6,9 +6,11 @@ const product_name_index = 1;
 const selling_price_index = 3;
 const status_index = 6;
 const quantity_index = 7;
-const image_name_1_index = 8;
-const image_name_2_index = 9;
-const informative_text_index = 10;
+const informative_text_index = 8;
+const image_name_1_index = 9;
+const image_name_2_index = 10;
+const image_name_3_index = 11;
+const image_name_4_index = 12;
 
 export const useGoogleSheet = () => {
   const [fetchedProducts, setFetchedProducts] = useState();
@@ -33,7 +35,9 @@ export const useGoogleSheet = () => {
             // Get the images of the plant. Max 2
             const image1 = getCellValue(image_name_1_index);
             const image2 = getCellValue(image_name_2_index);
-            const images = [image1, image2]
+            const image3 = getCellValue(image_name_3_index);
+            const image4 = getCellValue(image_name_4_index);
+            const images = [image1, image2, image3, image4]
               .filter(Boolean)
               .map((imageName) => `images/plants/${imageName}`);
 
