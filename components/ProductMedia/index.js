@@ -1,4 +1,4 @@
-import { Box, Img, IconButton } from "@chakra-ui/react";
+import { Box, Button, Img, IconButton } from "@chakra-ui/react";
 import { useState } from "react";
 import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons";
 
@@ -14,7 +14,12 @@ const ButtonNext = (props) => (
   </IconButton>
 );
 
-export function ProductMedia({ images }) {
+export function ProductMedia({
+  onClick,
+  images,
+  height = "auto",
+  showZoomIn = true,
+}) {
   const hasManyImages = images.length > 1;
   const [imageIndexSelected, setImageIndexSelected] = useState(0);
 
@@ -23,21 +28,23 @@ export function ProductMedia({ images }) {
       <Box
         borderRadius="10px"
         width="100%"
-        height="350px"
-        maxHeight="350px"
+        height={height}
+        maxHeight={height}
         background="gray.50"
       />
     );
   }
 
   const showPreviousButton = hasManyImages && imageIndexSelected > 0;
-  const handleOnButtonPreviousClick = () => {
+  const handleOnButtonPreviousClick = (e) => {
+    e.stopPropagation();
     setImageIndexSelected((old) => old - 1);
   };
 
   const showNextButton =
     hasManyImages && imageIndexSelected < images.length - 1;
-  const handleOnNextPreviousClick = () => {
+  const handleOnNextPreviousClick = (e) => {
+    e.stopPropagation();
     setImageIndexSelected((old) => old + 1);
   };
 
@@ -46,8 +53,20 @@ export function ProductMedia({ images }) {
       width="100%"
       backgroundColor="gray.50"
       position="relative"
-      height="350px"
+      height={height}
+      onClick={onClick}
     >
+      {showZoomIn && (
+        <Button
+          size="sm"
+          position="absolute"
+          right={2}
+          bottom={2}
+          onClick={onClick}
+        >
+          Ampliar
+        </Button>
+      )}
       {showPreviousButton && (
         <Box position="absolute" left={2} top="45%">
           <ButtonPrevious size="sm" onClick={handleOnButtonPreviousClick} />
@@ -56,10 +75,13 @@ export function ProductMedia({ images }) {
       <Img
         borderRadius="10px"
         width="100%"
-        height="350px"
+        height={height}
         objectFit={"cover"}
-        maxHeight="350px"
+        maxHeight={height}
         src={images[imageIndexSelected]}
+        _hover={{
+          cursor: showZoomIn ? "pointer" : "default",
+        }}
       />
       {showNextButton && (
         <Box position="absolute" right={2} top="45%">
