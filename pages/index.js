@@ -55,6 +55,7 @@ export default function Home() {
                   quantity={product.quantity}
                   price={product.price}
                   informative_text={product.informative_text}
+                  status={product.status}
                 />
               ))}
         </SimpleGrid>
