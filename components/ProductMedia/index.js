@@ -1,6 +1,7 @@
 import { Box, Button, Img, IconButton } from "@chakra-ui/react";
 import { useState } from "react";
 import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons";
+import { DynamicRender } from "../LoadingProduct/DynamicRender";
 
 const ButtonPrevious = (props) => (
   <IconButton {...props} colorScheme={"blackAlpha"}>
@@ -81,17 +82,19 @@ export function ProductMedia({
           <ButtonPrevious size="sm" onClick={handleOnButtonPreviousClick} />
         </Box>
       )}
-      <Img
-        borderRadius="10px"
-        width="100%"
-        height={height}
-        objectFit={"cover"}
-        maxHeight={height}
-        src={images[imageIndexSelected]}
-        _hover={{
-          cursor: showZoomIn ? "pointer" : "default",
-        }}
-      />
+      <DynamicRender>
+        <Img
+          borderRadius="10px"
+          width="100%"
+          height={height}
+          objectFit={"cover"}
+          maxHeight={height}
+          src={images[imageIndexSelected]}
+          _hover={{
+            cursor: showZoomIn ? "pointer" : "default",
+          }}
+        />
+      </DynamicRender>
       {showNextButton && (
         <Box position="absolute" right={2} top="45%">
           <ButtonNext size="sm" onClick={handleOnNextPreviousClick} />

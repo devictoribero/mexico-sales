@@ -1,0 +1,44 @@
+import { useState, useRef, useEffect } from "react";
+
+function useOnScreen({ ref, once = true, offset = "0px" } = {}) {
+  // State and setter for storing whether element is visible or not
+  const [isIntersecting, setIntersecting] = useState(false);
+  const outerRef = useRef();
+
+  useEffect(() => {
+    const usableRef = ref || outerRef;
+    const { current } = usableRef || {};
+    if (!current) return;
+
+    let observer;
+    (window.IntersectionObserver
+      ? Promise.resolve()
+      : import("intersection-observer")
+    ) // eslint-disable
+      .then(() => {
+        observer = new window.IntersectionObserver(
+          ([entry]) => {
+            // Update our state when observer callback fires
+            setIntersecting(entry.isIntersecting);
+            if (entry.isIntersecting) {
+              // Unobserve now if we've set once option
+              once && observer && observer.unobserve(current);
+            }
+          },
+          {
+            rootMargin: offset
+          }
+        );
+
+        current && observer.observe(current);
+      });
+
+    return () => {
+      observer && observer.unobserve(current);
+    };
+  }, [offset, once, ref]);
+
+  return [isIntersecting, outerRef];
+}
+
+export default useOnScreen;

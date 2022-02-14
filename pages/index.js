@@ -4,6 +4,7 @@ import { Product } from "../components/Product";
 import { LoadingProduct } from "../components/LoadingProduct";
 import { useGoogleSheet } from "../hooks/useGoogleSheet";
 import { contactTel, telHref, whatsappHref } from "../lib/contact";
+import { DynamicRender } from "../components/LoadingProduct/DynamicRender";
 
 const Hyperlink = ({ children, ...props }) => (
   <Link isExternal color="blue.500" textDecoration="underline" {...props}>
@@ -43,8 +44,8 @@ export default function Home() {
           rowGap={6}
         >
           {!products
-            ? emptyProducts.map((product) => (
-                <LoadingProduct key={product.name} />
+            ? emptyProducts.map((product, index) => (
+                <LoadingProduct key={`${product.name}_${index}`} />
               ))
             : products?.map((product, index) => (
                 <Product

@@ -1,9 +1,9 @@
 import React from "react";
 
-import useNearScreen from "src/client/hooks/use-near-screen";
-import useOnScreen from "src/client/hooks/use-on-screen";
+import useNearScreen from "./use-near-screen";
+import useOnScreen from "./use-on-screen";
 
-const DynamicRender = ({ children, placeholder, ...rest }) => {
+export const DynamicRender = ({ children, placeholder, ...rest }) => {
   const [isNear, outerRef] = useNearScreen({ offset: 200 + "px" });
   const [isIntersecting] = useOnScreen();
 
@@ -17,4 +17,3 @@ const DynamicRender = ({ children, placeholder, ...rest }) => {
     </div>
   );
 };
-export default DynamicRender;
