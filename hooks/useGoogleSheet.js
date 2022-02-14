@@ -4,6 +4,7 @@ const EXCEL_URL =
   "https://docs.google.com/spreadsheets/d/1V0voHbac2XbAxAlwVysLgb8awaDh-Hyshk6d9QvDIpo/gviz/tq?";
 const product_name_index = 1;
 const selling_price_index = 3;
+const category_index = 5;
 const status_index = 6;
 const informative_text_index = 7;
 const image_name_1_index = 8;
@@ -31,24 +32,36 @@ export const useGoogleSheet = () => {
               return;
             }
 
-            // Get the images of the plant. Max 2
-            const image1 = getCellValue(image_name_1_index);
-            const image2 = getCellValue(image_name_2_index);
-            const image3 = getCellValue(image_name_3_index);
-            const image4 = getCellValue(image_name_4_index);
-            const images = [image1, image2, image3, image4]
-              .filter(Boolean)
-              .filter((name) => name.includes(".jpg")) //make sure the image is present and is not an annotation
-              .map((imageName) => `images/plants/${imageName}`);
+            const category = getCellValue(category_index);
 
-            images.length > 0 &&
+            if (category !== "Plantas") {
               products.push({
                 name: getCellValue(product_name_index),
                 price: getCellValue(selling_price_index) || "Preguntar",
                 status: getCellValue(status_index),
                 informative_text: getCellValue(informative_text_index),
-                images: images,
+                images: [],
               });
+            } else {
+              // Get the images of the plant. Max 2
+              const image1 = getCellValue(image_name_1_index);
+              const image2 = getCellValue(image_name_2_index);
+              const image3 = getCellValue(image_name_3_index);
+              const image4 = getCellValue(image_name_4_index);
+              const images = [image1, image2, image3, image4]
+                .filter(Boolean)
+                .filter((name) => name.includes(".jpg")) // Make sure the image is present and is not an annotation
+                .map((imageName) => `images/plants/${imageName}`);
+
+              images.length > 0 &&
+                products.push({
+                  name: getCellValue(product_name_index),
+                  price: getCellValue(selling_price_index) || "Preguntar",
+                  status: getCellValue(status_index),
+                  informative_text: getCellValue(informative_text_index),
+                  images: images,
+                });
+            }
           });
 
         setFetchedProducts(products);

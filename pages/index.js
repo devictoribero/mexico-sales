@@ -38,7 +38,7 @@ export default function Home() {
 
       <Box as="main">
         <SimpleGrid
-          columns={{ base: 1, sm: 2, lg: 3, xl: 4 }}
+          columns={{ base: 2, lg: 3, xl: 4 }}
           columnGap={{ base: 2, md: 4 }}
           rowGap={6}
         >

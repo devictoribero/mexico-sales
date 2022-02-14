@@ -25,7 +25,11 @@ export const Product = ({
 
   return (
     <Flex key={name} flexDirection={"column"}>
-      <ProductMedia onClick={onOpen} images={images} height="350px" />
+      <ProductMedia
+        onClick={onOpen}
+        images={images}
+        height={{ base: "250px", md: "350px" }}
+      />
       <ProductInfo
         mt={2}
         name={name}

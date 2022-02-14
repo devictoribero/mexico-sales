@@ -26,12 +26,21 @@ export function ProductMedia({
   if (!images?.length || images.length === 0) {
     return (
       <Box
-        borderRadius="10px"
-        width="100%"
-        height={height}
-        maxHeight={height}
+        alignItems="center"
         background="gray.50"
-      />
+        borderRadius="10px"
+        color="#b5b5b5"
+        display="flex"
+        fontSize="24px"
+        fontWeight="600"
+        height="100px"
+        justifyContent="center"
+        maxHeight="100px"
+        textTransform="uppercase"
+        width="100%"
+      >
+        Pedir foto
+      </Box>
     );
   }
 
