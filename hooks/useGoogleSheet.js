@@ -6,11 +6,11 @@ const product_name_index = 1;
 const selling_price_index = 3;
 const category_index = 5;
 const status_index = 6;
-const informative_text_index = 7;
-const image_name_1_index = 8;
-const image_name_2_index = 9;
-const image_name_3_index = 10;
-const image_name_4_index = 11;
+const informative_text_index = 8;
+const image_name_1_index = 9;
+const image_name_2_index = 10;
+const image_name_3_index = 11;
+const image_name_4_index = 12;
 
 export const useGoogleSheet = () => {
   const [fetchedProducts, setFetchedProducts] = useState();
@@ -21,6 +21,8 @@ export const useGoogleSheet = () => {
       .then((res) => {
         const data = JSON.parse(res.substr(47).slice(0, -2));
         let products = [];
+        let productsReserved = [];
+        let productsSold = [];
         data.table.rows
           .map((row) => row?.c)
           .map((rowValues) => {
@@ -33,38 +35,42 @@ export const useGoogleSheet = () => {
             }
 
             const category = getCellValue(category_index);
+            const status = getCellValue(status_index);
 
-            if (category !== "Plantas") {
-              products.push({
-                name: getCellValue(product_name_index),
-                price: getCellValue(selling_price_index) || "Preguntar",
-                status: getCellValue(status_index),
-                informative_text: getCellValue(informative_text_index),
-                images: [],
-              });
-            } else {
-              // Get the images of the plant. Max 2
-              const image1 = getCellValue(image_name_1_index);
-              const image2 = getCellValue(image_name_2_index);
-              const image3 = getCellValue(image_name_3_index);
-              const image4 = getCellValue(image_name_4_index);
-              const images = [image1, image2, image3, image4]
+            const product = {
+              name: getCellValue(product_name_index),
+              price: getCellValue(selling_price_index) || "Preguntar",
+              status: getCellValue(status_index),
+              informative_text: getCellValue(informative_text_index),
+              images: [
+                getCellValue(image_name_1_index),
+                getCellValue(image_name_2_index),
+              ]
                 .filter(Boolean)
                 .filter((name) => name.includes(".jpg")) // Make sure the image is present and is not an annotation
-                .map((imageName) => `images/plants/${imageName}`);
+                .map((imageName) => `images/plants/${imageName}`),
+            };
 
-              images.length > 0 &&
-                products.push({
-                  name: getCellValue(product_name_index),
-                  price: getCellValue(selling_price_index) || "Preguntar",
-                  status: getCellValue(status_index),
-                  informative_text: getCellValue(informative_text_index),
-                  images: images,
-                });
+            if (status === "vendido") {
+              productsSold.push(product);
+              return;
+            }
+
+            if (status === "reservado") {
+              productsReserved.push(product);
+              return;
+            }
+
+            const isPlant = category === "Plantas";
+            if (
+              !isPlant ||
+              (category === "Plantas" && product.images.length > 0)
+            ) {
+              products.push(product);
             }
           });
 
-        setFetchedProducts(products);
+        setFetchedProducts([...products, ...productsReserved, ...productsSold]);
       });
   }, []);
 
