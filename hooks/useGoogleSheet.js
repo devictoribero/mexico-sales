@@ -70,9 +70,25 @@ export const useGoogleSheet = () => {
             }
           });
 
-        setFetchedProducts([...products, ...productsReserved, ...productsSold]);
+        const allProducts = [
+          ...products.sort(sortByImage),
+          ...productsReserved.sort(sortByImage),
+          ...productsSold.sort(sortByImage),
+        ];
+
+        setFetchedProducts(allProducts);
       });
   }, []);
 
   return fetchedProducts;
 };
+
+function sortByImage(curr, next) {
+  if (curr.images.length < next.images.length) {
+    return 1;
+  }
+  if (curr.images.length > next.images.length) {
+    return -1;
+  }
+  return 0;
+}
