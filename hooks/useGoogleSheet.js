@@ -49,6 +49,7 @@ export const useGoogleSheet = () => {
               name: getCellValue(product_name_index),
               price: getCellValue(selling_price_index) || "Preguntar",
               status: getCellValue(status_index),
+              category,
               informative_text: getCellValue(informative_text_index),
               images: [
                 getCellValue(image_name_1_index),
@@ -92,7 +93,9 @@ export const useGoogleSheet = () => {
   }, []);
 
   return {
-    products: fetchedProducts,
+    products: selectedCategory
+      ? fetchedProducts.filter((p) => p.category === selectedCategory)
+      : fetchedProducts,
     categories,
     selectedCategory,
     selectCategory: setSelectedCategory,
