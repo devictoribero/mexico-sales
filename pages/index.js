@@ -49,9 +49,9 @@ export default function Home() {
       </Box>
 
       <Box as="main">
-        <Flex flexDirection="row" flexwrap="wrap" mb="24px">
+        <Flex flexDirection="row" flexWrap="wrap" mb="24px">
           <Button
-            size="sm"
+            size="md"
             colorScheme={!selectedCategory ? "green" : "gray"}
             onClick={() => selectCategory(null)}
             mr="4px"
@@ -63,7 +63,7 @@ export default function Home() {
             <Button
               key={c}
               colorScheme={selectedCategory === c ? "green" : "gray"}
-              size="sm"
+              size="md"
               onClick={() => selectCategory(c)}
               mr="4px"
               mb="4px"
