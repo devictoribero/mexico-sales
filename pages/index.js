@@ -1,4 +1,13 @@
-import { Box, Heading, Link, SimpleGrid, Text } from "@chakra-ui/react";
+import {
+  Button,
+  Flex,
+  Box,
+  Heading,
+  Link,
+  SimpleGrid,
+  Tag,
+  Text,
+} from "@chakra-ui/react";
 import { Layout } from "../components/Layout";
 import { Product } from "../components/Product";
 import { LoadingProduct } from "../components/LoadingProduct";
@@ -16,7 +25,9 @@ const emptyProducts = [
 ];
 
 export default function Home() {
-  const products = useGoogleSheet();
+  const { products, categories, selectedCategory, selectCategory } =
+    useGoogleSheet();
+
   return (
     <Layout title="Venta de plantas de Gabi y Victor">
       <Box as="header" mt={10}>
@@ -38,6 +49,30 @@ export default function Home() {
       </Box>
 
       <Box as="main">
+        <Flex flexDirection="row" flexwrap="wrap" mb="24px">
+          <Button
+            size="sm"
+            colorScheme={!selectedCategory ? "green" : "gray"}
+            onClick={() => selectCategory(null)}
+            mr="4px"
+            mb="4px"
+          >
+            Todas
+          </Button>
+          {categories?.map((c) => (
+            <Button
+              key={c}
+              colorScheme={selectedCategory === c ? "green" : "gray"}
+              size="sm"
+              onClick={() => selectCategory(c)}
+              mr="4px"
+              mb="4px"
+            >
+              {c}
+            </Button>
+          ))}
+        </Flex>
+
         <SimpleGrid
           columns={{ base: 2, lg: 3, xl: 4 }}
           columnGap={{ base: 2, md: 4 }}

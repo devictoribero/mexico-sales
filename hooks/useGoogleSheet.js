@@ -13,7 +13,9 @@ const image_name_3_index = 11;
 const image_name_4_index = 12;
 
 export const useGoogleSheet = () => {
-  const [fetchedProducts, setFetchedProducts] = useState();
+  const [fetchedProducts, setFetchedProducts] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     fetch(EXCEL_URL)
@@ -23,6 +25,8 @@ export const useGoogleSheet = () => {
         let products = [];
         let productsReserved = [];
         let productsSold = [];
+        let categories = [];
+
         data.table.rows
           .map((row) => row?.c)
           .map((rowValues) => {
@@ -34,7 +38,11 @@ export const useGoogleSheet = () => {
               return;
             }
 
+            // Get all categories to use as buttons to filter
             const category = getCellValue(category_index);
+            const categoryFound = categories.find((c) => c === category);
+            !categoryFound && categories.push(category);
+
             const status = getCellValue(status_index);
 
             const product = {
@@ -45,6 +53,8 @@ export const useGoogleSheet = () => {
               images: [
                 getCellValue(image_name_1_index),
                 getCellValue(image_name_2_index),
+                getCellValue(image_name_3_index),
+                getCellValue(image_name_4_index),
               ]
                 .filter(Boolean)
                 .filter((name) => name.includes(".jpg")) // Make sure the image is present and is not an annotation
@@ -76,11 +86,17 @@ export const useGoogleSheet = () => {
           ...productsSold.sort(sortByImage),
         ];
 
+        setCategories(categories);
         setFetchedProducts(allProducts);
       });
   }, []);
 
-  return fetchedProducts;
+  return {
+    products: fetchedProducts,
+    categories,
+    selectedCategory,
+    selectCategory: setSelectedCategory,
+  };
 };
 
 function sortByImage(curr, next) {
