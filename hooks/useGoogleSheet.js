@@ -48,7 +48,7 @@ export const useGoogleSheet = () => {
               ]
                 .filter(Boolean)
                 .filter((name) => name.includes(".jpg")) // Make sure the image is present and is not an annotation
-                .map((imageName) => `images/plants/${imageName}`),
+                .map((imageName) => `images/${imageName}`),
             };
 
             if (status === "vendido") {
