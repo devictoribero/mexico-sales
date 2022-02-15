@@ -29,7 +29,7 @@ export default function Home() {
     useGoogleSheet();
 
   return (
-    <Layout title="Venta de plantas de Gabi y Victor">
+    <Layout title="Venta de artículos para la casa, cocina, mascotas, deporte, etc.">
       <Box as="header" mt={10}>
         <Heading size="xl">Venta de artículos de Gabi y Victor</Heading>
         <Text fontSize="lg" mt={6}>
