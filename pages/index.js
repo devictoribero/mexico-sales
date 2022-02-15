@@ -57,7 +57,7 @@ export default function Home() {
             mr="4px"
             mb="4px"
           >
-            Todas
+            Todas las categorias
           </Button>
           {categories?.map((c) => (
             <Button
