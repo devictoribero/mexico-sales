@@ -85,10 +85,13 @@ export function ProductMedia({
       <DynamicRender>
         <Img
           borderRadius="10px"
-          width="100%"
+          width="auto"
           height={height}
           objectFit={"cover"}
           maxHeight="100%"
+          maxWidth="100%"
+          ml="auto"
+          mr="auto"
           src={images[imageIndexSelected]}
           _hover={{
             cursor: showZoomIn ? "pointer" : "default",
