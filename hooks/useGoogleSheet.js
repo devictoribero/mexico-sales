@@ -58,9 +58,15 @@ export const useGoogleSheet = () => {
                 getCellValue(image_name_4_index),
               ]
                 .filter(Boolean)
-                .filter((name) => name.includes(".jpg")) // Make sure the image is present and is not an annotation
+                .filter(
+                  (name) => name.includes(".jpg") || name.includes(".jpeg")
+                ) // Make sure the image is present and is not an annotation
                 .map((imageName) => `images/${imageName}`),
             };
+
+            if (product.name === "Mesa de madera de pino") {
+              console.log(product);
+            }
 
             if (status === "vendido") {
               productsSold.push(product);

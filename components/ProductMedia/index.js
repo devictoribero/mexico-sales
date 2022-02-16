@@ -88,7 +88,7 @@ export function ProductMedia({
           width="100%"
           height={height}
           objectFit={"cover"}
-          maxHeight={height}
+          maxHeight="100%"
           src={images[imageIndexSelected]}
           _hover={{
             cursor: showZoomIn ? "pointer" : "default",

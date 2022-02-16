@@ -68,7 +68,13 @@ export const Product = ({
           <ModalHeader>{name}</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <ProductMedia onClick={onOpen} images={images} showZoomIn={false} />
+            <Flex maxHeight="50vh">
+              <ProductMedia
+                onClick={onOpen}
+                images={images}
+                showZoomIn={false}
+              />
+            </Flex>
           </ModalBody>
 
           <ModalFooter>
