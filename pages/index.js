@@ -33,7 +33,7 @@ export default function Home() {
       <Box as="header" mt={10}>
         <Heading size="xl">Venta de artículos de Gabi y Victor</Heading>
         <Text fontSize="lg" mt={6}>
-          Nuestras plantas han recibido el amor de Victor y mío.
+          Todos nuestros artículos hanr ecibido el amor de Victor y mío.
         </Text>
         <Text fontSize="lg" mt={2} mb={12}>
           <Hyperlink href={whatsappHref()} mr="5px">

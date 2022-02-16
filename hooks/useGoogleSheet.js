@@ -25,7 +25,7 @@ export const useGoogleSheet = () => {
         let products = [];
         let productsReserved = [];
         let productsSold = [];
-        let categories = [];
+        let tmpCategories = [];
 
         data.table.rows
           .map((row) => row?.c)
@@ -40,8 +40,8 @@ export const useGoogleSheet = () => {
 
             // Get all categories to use as buttons to filter
             const category = getCellValue(category_index);
-            const categoryFound = categories.find((c) => c === category);
-            !categoryFound && categories.push(category);
+            const categoryFound = tmpCategories.find((c) => c === category);
+            !categoryFound && tmpCategories.push(category);
 
             const status = getCellValue(status_index);
 
@@ -87,7 +87,7 @@ export const useGoogleSheet = () => {
           ...productsSold.sort(sortByImage),
         ];
 
-        setCategories(categories);
+        setCategories(tmpCategories.filter(Boolean));
         setFetchedProducts(allProducts);
       });
   }, []);
