@@ -5,15 +5,13 @@ import {
   Heading,
   Link,
   SimpleGrid,
-  Tag,
   Text,
 } from "@chakra-ui/react";
 import { Layout } from "../components/Layout";
 import { Product } from "../components/Product";
 import { LoadingProduct } from "../components/LoadingProduct";
 import { useGoogleSheet } from "../hooks/useGoogleSheet";
-import { contactTel, telHref, whatsappHref } from "../lib/contact";
-import { DynamicRender } from "../components/LoadingProduct/DynamicRender";
+import { whatsappHref } from "../lib/contact";
 
 const Hyperlink = ({ children, ...props }) => (
   <Link isExternal color="blue.500" textDecoration="underline" {...props}>
@@ -33,18 +31,14 @@ export default function Home() {
       <Box as="header" mt={10}>
         <Heading size="xl">Venta de artículos de Gabi y Victor</Heading>
         <Text fontSize="lg" mt={6}>
-          Todos nuestros artículos hanr ecibido el amor de Victor y mío.
+          Todos nuestros artículos han recibido el amor de Victor y mío.
         </Text>
         <Text fontSize="lg" mt={2} mb={12}>
           <Hyperlink href={whatsappHref()} mr="5px">
             Envíame un WhatsApp
           </Hyperlink>
-          con la foto del artículo o la planta que te interese tener en casa
-          🐈‍⬛ 🌱 🐈.
-          {/* o
-          <Hyperlink href={telHref()} ml="5px">
-            llameme al {contactTel}
-          </Hyperlink> */}
+          con la foto del artículo o la planta que te interese tener en casa 🐈‍⬛
+          🌱 🐈.
         </Text>
       </Box>
 
