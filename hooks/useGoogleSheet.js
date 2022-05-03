@@ -64,26 +64,14 @@ export const useGoogleSheet = () => {
                 .map((imageName) => `images/${imageName}`),
             };
 
-            if (product.name === "Mesa de madera de pino") {
-              console.log(product);
-            }
-
-            if (status === "vendido") {
-              productsSold.push(product);
-              return;
-            }
-
-            if (status === "reservado") {
-              productsReserved.push(product);
-              return;
-            }
-
-            const isPlant = category === "Plantas";
-            if (
-              !isPlant ||
-              (category === "Plantas" && product.images.length > 0)
-            ) {
-              products.push(product);
+            if (status === "disponible") {
+              const isPlant = category === "Plantas";
+              if (
+                !isPlant ||
+                (category === "Plantas" && product.images.length > 0)
+              ) {
+                products.push(product);
+              }
             }
           });
 
